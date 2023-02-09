@@ -39,9 +39,9 @@ function diceToString(dice) {
             case 5: retval += "⚄ "; break;
             case 6: retval += "⚅ "; break;
             default: break;
-            }
-        return retval;
+            }    
     }
+    return retval;
 }
 
 function getTotaal(dice) {
