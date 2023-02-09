@@ -1,5 +1,5 @@
 // declarations
-const rnd = Math.random();
+const rnd = Math.ceil(Math.random() * 6);
 const players = ['Magnus', 'Eline', 'Ding', 'Judith', 'Praggna'];
 const scores = [players.length];
 const NUM_DICE = 3;
@@ -15,7 +15,7 @@ for (let i = 0; i < players.length; i++) {
     console.log(` ${players[i]} gooit: `);
 const dice = [];
 for (let j = 0; j < NUM_DICE; j++) {
-    dice[j] = rnd(1, 7);
+    dice[j] = rnd;
 }
 scores[i] = getTotaal (dice);
 console.log(`${diceToString(dice)} ( ${scores[i]} punten)`);
@@ -32,12 +32,12 @@ function diceToString(dice) {
     let retval = '';
     for (const d of dice) {
         switch (d) {
-            case 1: retval += "⚀ "; break;
-            case 2: retval += "⚁ "; break;
-            case 3: retval += "⚂ "; break;
-            case 4: retval += "⚃ "; break;
-            case 5: retval += "⚄ "; break;
-            case 6: retval += "⚅ "; break;
+            case 1: retval += '⚀ '; break;
+            case 2: retval += '⚁ '; break;
+            case 3: retval += '⚂ '; break;
+            case 4: retval += '⚃ '; break;
+            case 5: retval += '⚄ '; break;
+            case 6: retval += '⚅ '; break;
             default: break;
             }    
     }
