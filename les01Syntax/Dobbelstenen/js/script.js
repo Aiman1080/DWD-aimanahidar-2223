@@ -1,5 +1,4 @@
 // declarations
-const rnd = Math.ceil(Math.random() * 6);
 const players = ['Magnus', 'Eline', 'Ding', 'Judith', 'Praggna'];
 const scores = [players.length];
 const NUM_DICE = 3;
@@ -15,7 +14,7 @@ for (let i = 0; i < players.length; i++) {
     console.log(` ${players[i]} gooit: `);
 const dice = [];
 for (let j = 0; j < NUM_DICE; j++) {
-    dice[j] = rnd;
+    dice[j] = Math.ceil(Math.random() * 6);
 }
 scores[i] = getTotaal (dice);
 console.log(`${diceToString(dice)} ( ${scores[i]} punten)`);
@@ -23,8 +22,6 @@ console.log(`${diceToString(dice)} ( ${scores[i]} punten)`);
 
 // show winner
 console.log('\nWINNAAR: ');
-document.body.style.backgroundColor = 'yellow';
-document.body.style.color = 'black';
 console.log(`${getWinner(scores, players)}`);
 
 // methodes
