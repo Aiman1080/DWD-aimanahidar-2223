@@ -22,7 +22,7 @@ console.log(`${diceToString(dice)} ( ${scores[i]} punten)`);
 
 // show winner
 console.log('\nWINNAAR: ');
-console.log(`${getWinner(scores, players)}`);
+console.log(`%c ${getWinner(scores, players)}`, 'background: yellow; color: black; font-style: italic; padding: 15px; text-transform: uppercase;');
 
 // methodes
 function diceToString(dice) {
