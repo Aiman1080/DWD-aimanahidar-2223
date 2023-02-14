@@ -27,7 +27,7 @@ form.addEventListener('submit', function(e) {
     msgMeasure.innerHTML = '';
     const namen = [];
     let som = 54.99;
-    let namenString = '';
+    let schoenen = '';
 
     // email
     if (inpEmail.value == '') {
@@ -55,9 +55,9 @@ form.addEventListener('submit', function(e) {
               }                 
         });
         if (namen.length > 0) {
-            namenString = namen.join(', ');
+            schoenen = namen.join(', ');
           }
-        message.innerHTML = `Je keuze: ${figCap.innerHTML} maat ${selMeasure.value}, ${namenString} (totaalprijs: €${som})`;
+        message.innerHTML = `Je keuze: ${figCap.innerHTML} maat ${selMeasure.value}, ${schoenen} (totaalprijs: €${som})`;
       }
 });
 
