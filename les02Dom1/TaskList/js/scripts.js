@@ -5,7 +5,7 @@ const lijst = document.querySelector('#tasks');
 
 const dropBox = document.querySelector('#selPriority');
 
-btn.addEventListener('submit', function(e) {
+btn.addEventListener('submit', function (e) {
     e.preventDefault();
 
     let kleur;
@@ -18,13 +18,19 @@ btn.addEventListener('submit', function(e) {
     } else if (prioriteit == 'high') {
         kleur = 'red';
     }
+    if (datum == '') {
+        const hulpHtml = `<div class="task"><span class="${kleur} priority material-icons">assignment</span><p class="tasktext">${taak.value}</span></p><span class="complete material-icons">more_horiz</span></div>`;
+        lijst.innerHTML += hulpHtml;
+    }
+    else if (datum != '') {
+        const hulpHtml = `<div class="task"><span class="${kleur} priority material-icons">assignment</span><p class="tasktext">${taak.value}<span class="deadline">(deadline: ${datum.value})</span></p><span class="complete material-icons">more_horiz</span></div>`;
+        lijst.innerHTML += hulpHtml;
+    }
 
-    const hulpHtml = `<div class="task"><span class="priority ${kleur} material-icons">assignment</span><p class="tasktext">${taak.value} <span class="deadline">(deadline: ${datum.value})</span></p><span class="complete material-icons">more_horiz</span></div>`;
-    lijst.innerHTML += hulpHtml;
     taak.value = '';
     datum.value = '';
 });
-lijst.addEventListener('click', function(e) {
+lijst.addEventListener('click', function (e) {
     if (e.target.innerHTML == 'more_horiz') {
         e.target.innerHTML = 'done';
         e.target.classList.add('done');
