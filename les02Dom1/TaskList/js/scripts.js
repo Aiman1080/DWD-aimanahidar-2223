@@ -24,7 +24,7 @@ btn.addEventListener('submit', function(e) {
     taak.value = '';
     datum.value = '';
 });
-lijst.addEventListener('click',function (e) {
+lijst.addEventListener('click', function(e) {
     if (e.target.innerHTML == 'more_horiz') {
         e.target.innerHTML = 'done';
         e.target.classList.add('done');

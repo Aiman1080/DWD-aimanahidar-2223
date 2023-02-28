@@ -10,17 +10,17 @@ btn.addEventListener('click', function(e) {
     e.preventDefault();
 
     if (inpNaam.value !== '' && inpBod.value !== '') {
-    const helpBod = parseInt(inpBod.value);
-    if (helpBod > hoogsteBod) { 
-    hoogsteBod = helpBod;
-    helpNaam = inpNaam.value;
-    msg.innerHTML = 'gefeliciteerd! je hebt momenteel het \n hoogste bod';
+        const helpBod = parseInt(inpBod.value);
+        if (helpBod > hoogsteBod) {
+            hoogsteBod = helpBod;
+            helpNaam = inpNaam.value;
+            msg.innerHTML = 'gefeliciteerd! je hebt momenteel het \n hoogste bod';
+        } else {
+            msg.innerHTML = `jammer! ${helpNaam} heeft een hoger bod`;
+        }
     } else {
-    msg.innerHTML = `jammer! ${helpNaam} heeft een hoger bod`;
+        msg.innerHTML = 'er is nog geen bod uitgebracht';
     }
-} else {
-    msg.innerHTML = 'er is nog geen bod uitgebracht';
-}
     inpNaam.value = '';
     inpBod.value = '';
 });
