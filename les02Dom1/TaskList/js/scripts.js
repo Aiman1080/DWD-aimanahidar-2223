@@ -5,7 +5,7 @@ const lijst = document.querySelector('#tasks');
 
 const dropBox = document.querySelector('#selPriority');
 
-btn.addEventListener('submit', function (e) {
+btn.addEventListener('submit', function(e) {
     e.preventDefault();
 
     let kleur;
@@ -30,7 +30,7 @@ btn.addEventListener('submit', function (e) {
     taak.value = '';
     datum.value = '';
 });
-lijst.addEventListener('click', function (e) {
+lijst.addEventListener('click', function(e) {
     if (e.target.innerHTML == 'more_horiz') {
         e.target.innerHTML = 'done';
         e.target.classList.add('done');
