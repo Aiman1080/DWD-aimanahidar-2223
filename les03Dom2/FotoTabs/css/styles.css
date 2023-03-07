@@ -1,0 +1,142 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   background-color: #EEF1C0;
+   font-family: roboto;
+   font-size: 14px;
+   margin: 0 auto;
+}
+
+header, nav {
+   background-color: #ccc;
+}
+
+header {
+   display: flex;
+   justify-content: space-between;
+   padding: 20px;
+}
+
+.header__view {
+   display: flex;
+   list-style: none;
+}
+
+.header__view li {
+   margin-left: 5px;
+}
+
+.header__view a {
+   color: #aaa;
+   text-decoration: none;
+}
+
+.header__view li a.active, .header__view li:hover a {
+   color: #000;
+}
+
+nav {
+   border-bottom: 1px solid #000;
+}
+
+h1 {
+   font-weight: 300;
+   margin-bottom: 20px;
+}
+
+.button {
+   background-color: #EEF1C0;
+   border: 1px solid #000;
+   color: #666;
+   cursor: pointer;
+   padding: 5px 10px;
+   text-decoration: none;
+   text-transform: uppercase;
+}
+
+.button.active {
+   border-bottom-color: #EEF1C0;
+}
+
+.button:hover {
+   background-color: #444;
+   color: #ccc;
+}
+
+.button:active {
+   background-color: #222;
+   color: #ccc;
+}
+
+.nav__filters {
+   display: flex;
+   justify-content: center;
+   list-style: none;
+}
+
+.nav__filters li {
+   margin: 5px;
+}
+
+.hidden {
+   display: none !important;
+}
+
+main p:first-child {
+   margin: 0 auto;
+   max-width: 1000px;
+   padding: 20px;
+   padding-bottom: 0;
+}
+
+#grid figcaption {
+   font-size: smaller;
+   font-style: italic;
+}
+
+#grid img {
+   max-width: 100%;
+}
+
+/* grid view */
+
+#grid.viewGrid {
+   display: flex;
+   flex-flow: row wrap;
+   margin: 0 auto;
+   max-width: 1000px;
+   padding: 20px;
+}
+
+#grid.viewGrid figure {
+   margin-bottom: 20px;
+   margin-right: 2%;
+   width: 23%;
+}
+
+/* list view */
+
+#grid.viewList {
+   display: flex;
+   flex-flow: column nowrap;
+   margin: 0 auto;
+   max-width: 1000px;
+   padding: 20px;
+}
+
+#grid.viewList figure {
+   display: flex;
+   margin-bottom: 20px;
+}
+
+#grid.viewList figure figcaption {
+   font-size: 18px;
+}
+
+#grid.viewList figure img {
+   margin-right: 20px;
+   max-width: 400px;
+}

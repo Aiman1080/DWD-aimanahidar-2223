@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(244, 203, 244);
+}
+
+#kleur {
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+#tekst {
+    background-color: rgb(147, 145, 145);
+    border: solid black 2px;
+    margin-top: 10px;
+}
+
+#tekst p {
+    margin: 10px;
+}
+
+.shadow {
+    text-shadow: 7px 7px 7px rgb(15, 15, 15);
+}
+.background {
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+.transform {
+    transform: rotate(180deg);
+}
