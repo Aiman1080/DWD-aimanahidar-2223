@@ -29,7 +29,7 @@ view.forEach(link => {
         event.preventDefault();
         document.querySelector('.active').classList.remove('active');
         if (link.id == 'lnkViewList') {
-            console.log('link.id:', link.id);
+//            console.log('link.id:', link.id);
             grid.classList.remove('viewGrid');
             grid.classList.add('viewList');
         } else if (link.id == 'lnkViewGrid') {
