@@ -1,0 +1,16 @@
+img {
+    width: 200px;
+    height: 200px;
+}
+
+figure {
+    display: block;
+}
+
+img:hover{
+	cursor: pointer;
+}
+
+.active{
+	filter: brightness(95%);
+}
