@@ -1,7 +1,7 @@
 const figBig = document.querySelector('#figBig');
 const thumbLinks = document.querySelectorAll('.thumbs a');
-
-const buttons = document.querySelectorAll('.navbuttons button');
+const btnPrev = document.querySelector('#btnPrev');
+const btnNext = document.querySelector('#btnNext');
 let index = 0;
 
 function showImage(lnk) {
@@ -11,21 +11,30 @@ function showImage(lnk) {
    lnk.classList.add('active');
 }
 
-thumbLinks.forEach(lnk => {
+thumbLinks.forEach((lnk, teller) => {
    lnk.addEventListener('click', function(e) {
       e.preventDefault();
+      index = teller;
       showImage(lnk);
    });
 });
 
-buttons.forEach(btn => {
-   btn.addEventListener('click', function() {
-     if (btn.id == 'btnPrev' && index > 0) {
-       index--;
-     } else if (btn.id == 'btnNext' && index < 4) {
-       index++;
-     }
-     showImage(thumbLinks[index]);
-   });
- });
- 
+btnPrev.addEventListener('click', function(e) {
+  e.preventDefault();
+  if (index > 0) {
+    index = index - 1;
+  } else {
+    index = thumbLinks.length - 1;
+  }
+  showImage(thumbLinks[index]);
+});
+
+btnNext.addEventListener('click', function(e) {
+  e.preventDefault();
+  if (index < thumbLinks.length - 1) {
+    index = index + 1;
+  } else {
+    index = 0;
+  }
+  showImage(thumbLinks[index]);
+});

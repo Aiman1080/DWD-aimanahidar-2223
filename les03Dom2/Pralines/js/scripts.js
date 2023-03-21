@@ -8,8 +8,9 @@ const beschrijving = document.querySelector('#ddBeschrijving');
 lstImg.forEach(img => {
     img.addEventListener('click', function() 
     {
-        if (hulp == true) {
-            document.querySelector('.active').classList.remove('active');
+        let currentId = document.querySelector('.active');
+        if (currentId) {
+            currentId.classList.remove('active');
         }
         img.classList.add('active');
         hulp = true;
