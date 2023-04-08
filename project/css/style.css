@@ -6,3 +6,19 @@ form {
 .parents{
     display: flex;
 }
+
+body {
+    text-align: center;
+  }
+  
+  main {
+    border: 1px solid black;
+    padding: 20px;
+    display: inline-block;
+  }
+  
+  #buttons {
+    margin-top: 20px;
+    border: 1px solid black;
+    display: inline-block;
+  }
