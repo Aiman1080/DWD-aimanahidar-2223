@@ -1,0 +1,43 @@
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+.soundwrapper {
+   align-items: center;   
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+}
+
+.sound {
+   height: 94px;
+   margin-bottom: 10px;
+   overflow: hidden;
+   position: relative;
+   width: 94px;
+}
+.sound__button {
+   background: url(../img/button_normal.webp) no-repeat;
+   border: 0;
+   cursor: pointer;
+   height: 94px;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 94px;
+}
+
+.sound__button:active {
+   background: url(../img/button_down.webp) no-repeat;
+}
+
+.sound__background {
+   border-radius: 50%;
+   height: 94px;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 94px;
+}
