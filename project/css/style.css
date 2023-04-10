@@ -41,3 +41,38 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #0c7cd5;
 }
+
+.audio {
+    background: url(../img/button_normal.webp) no-repeat;
+    border: 0;
+    cursor: pointer;
+    height: 90px;
+    margin: 0 auto;
+    text-align: center;
+    width: 90px;
+    align-items: center;
+}
+
+.audio img {
+    margin: auto;
+}
+
+.audioBtn {
+    background: url(../img/button_normal.webp) no-repeat;
+    cursor: pointer;
+    margin: 0 auto;
+    height: 90px;
+    width: 90px;
+    align-items: center;
+    border: 0;
+}
+
+.audioBtn:active {
+    background: url(../img/button_down.webp) no-repeat;
+}
+
+  
+  
+  
+  
+  
