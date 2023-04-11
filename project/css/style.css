@@ -1,12 +1,3 @@
-
-form {
-    display: flex;
-}
-
-.parents{
-    display: flex;
-}
-
 body {
     text-align: center;
   }
@@ -15,34 +6,59 @@ body {
     border: 1px solid black;
     padding: 20px;
     display: inline-block;
-  }
-  
-  #buttons {
-    margin-top: 20px;
-    border: 1px solid black;
-    display: inline-block;
+    margin: 0 auto; 
   }
 
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .parents {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
   input[type="text"] {
     margin-left: 10px;
     padding: 5px;
     width: 200px;
-}
-
-button[type="submit"] {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button[type="submit"] {
     background-color: #2196f3;
     border: none;
     color: white;
     cursor: pointer;
     padding: 10px 20px;
-    margin-left: 10px;
-}
-
-button[type="submit"]:hover {
+  }
+  
+  button[type="submit"]:hover {
     background-color: #0c7cd5;
-}
-
-.audio {
+  }
+  
+  #fav {
+    margin-top: 20px;
+  }
+  
+  #fav p {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  #favDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .audio {
     background: url(../img/button_normal.webp) no-repeat;
     border: 0;
     cursor: pointer;
@@ -51,13 +67,14 @@ button[type="submit"]:hover {
     text-align: center;
     width: 90px;
     align-items: center;
-}
-
-.audio img {
-    margin: auto;
-}
-
-.audioBtn {
+    display: flex;
+  }
+  
+  .audio img {
+    margin-left: 10px;
+    align-self: center;
+  }
+  .audioBtn {
     background: url(../img/button_normal.webp) no-repeat;
     cursor: pointer;
     margin: 0 auto;
@@ -65,14 +82,35 @@ button[type="submit"]:hover {
     width: 90px;
     align-items: center;
     border: 0;
-}
-
-.audioBtn:active {
+  }
+  
+  .audioBtn:active {
     background: url(../img/button_down.webp) no-repeat;
+  }
+
+  header {
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin: 0;
+    padding: 10px;
+    color: #2196f3;
+    text-shadow: 1px 1px #ccc;
+  }
+  
+  small {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  #fav.hidden {
+    display: none;
 }
 
-  
-  
-  
-  
-  
+.audioBtn.playing {
+    opacity: 0.75;
+  }
