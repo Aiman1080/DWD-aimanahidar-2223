@@ -4,9 +4,7 @@ const key = 'Wzy8gud0klcnIVIqLTsiOZDsnaAlyJEsZHQ0Z8Mo';
 const btnZoeken = document.querySelector('form button');
 const favBtn = document.querySelector('#favBtn');
 const favoritesDiv = document.querySelector('#favDiv');
-const favContainer = document.querySelector('#fav');
-
-favContainer.classList.add('hidden');
+const favContainer = document.querySelector('.favorites');
 
 const url = `https://freesound.org/apiv2/search/text/?token=${key}`;
 
@@ -17,6 +15,7 @@ btnZoeken.addEventListener('click', async function (e) {
     const res = await data.json();
     const results = result(res);
     create(results);
+    attachEventListeners();
 });
 
 function result(results) {
@@ -32,23 +31,22 @@ function result(results) {
 
 function createSound(r) {
     return `
-      <div class="sound-card">
-        <h2>${r.title}</h2>
-        <img src="${r.img}" alt="${r.title}">
-        <div class="audio">
-            <button class="audioBtn"></button>
-            <audio src="${r.audio}"></audio>
-        </div>
-        <p>${r.time}</p>
-        <button class="add-btn" onclick="addToFavorites(this)">Add</button>
-        <button class="delete-btn" onclick="deleteFromFavorites(this)" disabled>Delete</button>
-      </div>
-    `;
+  <div class="soundwrapper" id="${r.id}">
+    <div class="sound-card">
+      <h2>${r.title}</h2>
+      <img src="${r.img}" alt="${r.title}">
+      <div class="sound__background" style="background-image: url(${r.images});"></div>
+          <button class="audioBtn"></button>
+          <audio src="${r.audio}"></audio>
+      <p>${r.time}S</p>
+      <button class="favosection">Add to favorites</button>
+      <button class="faster">X2</button>
+    </div>
+  `;
 }
 
 function create(results) {
-    const resHTML = results.map(resultaat =>
-        createSound(resultaat)).join('');
+    const resHTML = results.map(resultaat => createSound(resultaat)).join('');
     buttonsDiv.innerHTML = resHTML;
 
     const audioBtns = document.querySelectorAll('.audioBtn');
@@ -58,7 +56,8 @@ function create(results) {
             if (audio.paused) {
                 audio.play();
                 this.classList.add('playing');
-            } else {
+            }
+            else {
                 audio.pause();
                 audio.currentTime = 0;
                 this.classList.remove('playing');
@@ -67,61 +66,44 @@ function create(results) {
     });
 }
 
-const buttons = document.querySelectorAll('.audioBtn');
-const audios = document.querySelectorAll('.audio');
+const audio = document.querySelector('audio');
+const fasterButton = document.querySelector('.faster');
 
-buttons.forEach((btn, index) => {
-  btn.addEventListener('click', function() {
-    audios.forEach((audio, audioIndex) => {
-      if (audioIndex !== index) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
-    audios[index].play();
-  });
+fasterButton.addEventListener('click', function () {
+    audio.playbackRate = 2;
 });
 
-function addToFavorites(button) {
-    const soundCard = button.parentNode;
-    const soundCardClone = soundCard.cloneNode(true);
-    const deleteButton = soundCardClone.querySelector('.delete-btn');
-    deleteButton.removeAttribute('disabled');
-    favoritesDiv.appendChild(soundCardClone);
-    favContainer.classList.remove('hidden');
+const refreshBtn = document.querySelector('.refresh');
 
-    const favoriteSounds = JSON.parse(localStorage.getItem('favoriteSounds')) || [];
-    const sound = { id: soundCardClone.id, html: soundCardClone.outerHTML };
-    favoriteSounds.push(sound);
-    localStorage.setItem('favoriteSounds', JSON.stringify(favoriteSounds));
-}
+refreshBtn.addEventListener('click', function () {
+    location.reload();
+});
 
-function deleteFromFavorites(button) {
-    const soundCard = button.parentNode;
-    soundCard.remove();
-
-    const favoritesDiv = document.querySelector('#favDiv');
-    const favoritesList = favoritesDiv.querySelectorAll('.sound-card');
-    if (favoritesList.length === 0) {
-        const favoritesHeader = document.querySelector('#fav p');
-        removeLocalStorage(favoritesHeader.dataset.id);
-        const favoritesSection = document.querySelector('#fav');
-        favoritesSection.style.display = 'none';
-    }
-
-    const favoriteSounds = JSON.parse(localStorage.getItem('favoriteSounds')) || [];
-    const update = favoriteSounds.filter((sound) => sound.id !== soundCard.id);
-    localStorage.setItem('favoriteSounds', JSON.stringify(update));
-}
+const audios = document.querySelectorAll('.audio');
+const buttons = document.querySelectorAll('.audioBtn');
+buttons.forEach((btn, index) => {
+    btn.addEventListener('click', function () {
+        audios.forEach((audio, audioIndex) => {
+            if (audioIndex !== index) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        });
+        audios[index].play();
+    });
+});
 
 function sound() {
-    const audio = this.closest('.audio').querySelector('audio');
+    const soundWrapper = this.closest('.soundwrapper');
+    const audio = soundWrapper.querySelector('audio');
     const activeBtn = document.querySelector('.audioBtn.active');
+
     if (activeBtn && activeBtn !== this) {
         const activeAudio = activeBtn.nextElementSibling;
         activeAudio.pause();
         activeBtn.classList.remove('active');
     }
+
     if (!audio.paused) {
         audio.pause();
         this.classList.remove('active');
@@ -136,8 +118,16 @@ function sound() {
         });
         audio.play();
         this.classList.add('active');
+
+        // Create a copy of the sound card and append it to the favorites section
+        const favoritesWrapper = soundWrapper.cloneNode(true);
+        const favosection = favoritesWrapper.querySelector('.favosection');
+        favosection.remove(); // remove the "Add to favorites" button from the copy
+        favContainer.appendChild(favoritesWrapper);
     }
 }
+
+
 function setRandomColor(element) {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
@@ -148,13 +138,70 @@ function setRandomColor(element) {
 
 const audioBtns = document.querySelectorAll('.audioBtn');
 audioBtns.forEach(btn => {
-    btn = setRandomColor(btn);
+    setRandomColor(btn);
     btn.addEventListener('click', sound);
 });
 
-function removeLocalStorage(x) {
-    const save = JSON.parse(localStorage.getItem('favorite')) || [];
-    const update = save.filter((sound) => sound.id !== x);
-    localStorage.setItem('favorite', JSON.stringify(update));
+function attachEventListeners() {
+    const favoriteBtns = document.querySelectorAll('.btnfav');
+    favoriteBtns.forEach((btn) => {
+        btn.addEventListener('click', toggleFavorite);
+    });
+
+    const playSoundButtons = document.querySelectorAll('.audioBtn');
+    playSoundButtons.forEach((button) => {
+        button.addEventListener('click', togglePlaySound);
+    });
 }
 
+// Récupérer les éléments HTML
+const favosectionButton = document.getElementById('favosection');
+const favorietesoundsDiv = document.getElementById('favorietesounds');
+const soundButton = document.getElementById('sound__button');
+
+// Ajouter un événement de clic sur le bouton "favosection"
+favosectionButton.addEventListener('click', () => {
+    // Déplacer le bouton "sound__button" dans le div "favorietesounds"
+    favorietesoundsDiv.appendChild(soundButton);
+});
+
+const sounds = document.querySelector('.sounds');
+
+
+function togglePlaySound() {
+    const audioElement = this.closest('.sound').querySelector('.audioBtn');
+    if (audioElement.paused) {
+        audioElement.play();
+        this.classList.add('audioBtn--active');
+    } else {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+        this.classList.remove('audioBtn--active');
+    }
+}
+
+const favosectionBtn = document.getElementById('favosection');
+const soundBtn = document.getElementById('sound__button');
+const favoritesoundsDiv = document.getElementById('favoritesounds');
+
+favosectionBtn.addEventListener('click', () => {
+    favoritesoundsDiv.appendChild(soundBtn);
+});
+const deleteBtn = document.querySelector('#deletebtn');
+
+function removeAllButtons() {
+    const soundWrappers = sounds.querySelectorAll('.soundwrapper');
+    soundWrappers.forEach(soundWrapper => {
+        const soundButton = soundWrapper.querySelector('.audioBtn');
+        sounds.appendChild(soundWrapper);
+        soundButton.classList.remove('audioBtn--active');
+    });
+    sounds.innerHTML = '';
+}
+deleteBtn.addEventListener('click', removeAllButtons);
+
+sounds.addEventListener('DOMNodeInserted', attachEventListeners);
+sounds.addEventListener('DOMNodeRemoved', attachEventListeners);
+
+loadFavoriteSounds();
+attachEventListeners();
