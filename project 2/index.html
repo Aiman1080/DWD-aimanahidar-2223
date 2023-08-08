@@ -17,8 +17,24 @@
     <main>
         <section id="filter">
             <form id="form">
-                <input type="text" id="input" placeholder="Zoek films met namen">
-                <button type="submit">Zoek</button>
+                <div id="filter-inputs">
+                    <input type="text" id="input" placeholder="Zoek films met namen">
+                    <button type="submit" id="zoek">Zoek</button>
+                    <button type="submit" id="random-button">Random</button>
+                </div>
+                <div id="filter-options">
+                    <select id="filter-genre">
+                        <option value="">Genre</option>
+                    </select>
+                    <input type="checkbox" id="filter-awards">
+                    <label for="filter-awards">Avec récompenses</label>
+                    <select id="filter-type">
+                        <option value="">Alles</option>
+                        <option value="movie">Film</option>
+                        <option value="series">Série</option>
+                    </select>
+                    <input type="number" id="filter-year" placeholder="Année de sortie">
+                </div>
             </form>
         </section>
 

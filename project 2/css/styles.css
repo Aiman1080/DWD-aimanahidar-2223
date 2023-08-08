@@ -31,7 +31,26 @@ main {
 }
 
 #input {
-  padding: 8px; 
+  padding: 8px;
+  margin-right: 15px; 
+}
+
+#filter-inputs{
+  margin: 15px;
+}
+
+#filter-options {
+  display: none;
+}
+
+#filter-inputs::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: purple;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #list {
