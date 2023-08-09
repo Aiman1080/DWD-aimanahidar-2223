@@ -47,8 +47,6 @@ async function displayRandomMovies() {
   displayMovies(moviesToDisplay);
 }
 
-displayRandomMovies();
-
 async function getMovieDetails(movieId) {
   const apiUrl = `http://www.omdbapi.com/?i=${movieId}&apikey=${apiKeyOMDb}`;
   const response = await fetch(apiUrl);
@@ -63,58 +61,62 @@ async function displayMovies(movies) {
     const movieDetails = await getMovieDetails(movie.imdbID);
 
     if (movieDetails) {
-      const movieCard = `
-        <div class="movie-card">
-          <h2>${movieDetails.Title}</h2>
-          <img src="${movieDetails.Poster}" alt="${movieDetails.Title} Poster">
-          <p>Genre: ${movieDetails.Genre}</p>
-          <p>Director: ${movieDetails.Director}</p>
-          <p>Release Date: ${movieDetails.Released}</p>
-        </div>
+      const movieCard = document.createElement('div');
+      movieCard.classList.add('movie-card');
+      movieCard.dataset.imdbId = movie.imdbID;
+      movieCard.innerHTML = `
+        <h2>${movieDetails.Title}</h2>
+        <img src="${movieDetails.Poster}" alt="${movieDetails.Title} Poster">
+        <p>Genre: ${movieDetails.Genre}</p>
+        <p>Director: ${movieDetails.Director}</p>
+        <p>Release Date: ${movieDetails.Released}</p>
+        <button class="like-button">Like</button>
+        <button class="watch-later-button">À regarder</button>
       `;
-      movieList.innerHTML += movieCard;
+      movieList.appendChild(movieCard);
     }
   }
 }
 
 async function searchMovies(event) {
-    event.preventDefault();
-    const searchQuery = searchInput.value;
-    const genreFilter = filterGenreSelect.value;
-    const awardsFilter = filterAwardsCheckbox.checked;
-    const typeFilter = filterTypeSelect.value;
-    const yearFilter = filterYearInput.value;
-  
-    const movies = await getMoviesBySearch(searchQuery, genreFilter, awardsFilter, typeFilter, yearFilter);
-    displayMovies(movies);
-  
-    fillGenreSelect();
-  }
+  event.preventDefault();
+  const searchQuery = searchInput.value;
+  const genreFilter = filterGenreSelect.value;
+  const awardsFilter = filterAwardsCheckbox.checked;
+  const typeFilter = filterTypeSelect.value;
+  const yearFilter = filterYearInput.value;
+
+  const movies = await getMoviesBySearch(searchQuery, genreFilter, awardsFilter, typeFilter, yearFilter);
+  displayMovies(movies);
+
+  fillGenreSelect();
+}
 
 filterGenreSelect.addEventListener('change', searchMovies);
 
 function showFilterOptions() {
-    const filterOptionsContainer = document.getElementById('filter-options');
-    filterOptionsContainer.style.display = 'block';
+  const filterOptionsContainer = document.getElementById('filter-options');
+  filterOptionsContainer.style.display = 'block';
 }
 
 function hideFilterOptions() {
-    const filterOptionsContainer = document.getElementById('filter-options');
-    filterOptionsContainer.style.display = 'none';
+  const filterOptionsContainer = document.getElementById('filter-options');
+  filterOptionsContainer.style.display = 'none';
 }
 
 searchForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    searchMovies(event);
-    showFilterOptions();
+  event.preventDefault();
+  searchMovies(event);
+  showFilterOptions();
 });
 
 randomButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    displayRandomMovies();
-    hideFilterOptions();
+  event.preventDefault();
+  displayRandomMovies();
+  hideFilterOptions();
 });
 
+// Genres
 async function getGenresFromAPI() {
   const apiUrl = `http://www.omdbapi.com/?apikey=${apiKeyOMDb}&s=`;
   const response = await fetch(apiUrl);
@@ -151,3 +153,111 @@ async function fillGenreSelect() {
 }
 
 fillGenreSelect();
+
+// Favorites
+function addToFavorites(movieDetails, rating) {
+    const favorites = getFavoritesFromLocalStorage();
+    favorites.push({ ...movieDetails, rating });
+    saveFavoritesToLocalStorage(favorites);
+    updateFavoritesList();
+  }
+
+function getFavoritesFromLocalStorage() {
+  const favoritesJSON = localStorage.getItem('favorites');
+  return favoritesJSON ? JSON.parse(favoritesJSON) : [];
+}
+
+function saveFavoritesToLocalStorage(favorites) {
+  const favoritesJSON = JSON.stringify(favorites);
+  localStorage.setItem('favorites', favoritesJSON);
+}
+
+function updateFavoritesList() {
+    const favoritesContainer = document.getElementById('favorites-list');
+    favoritesContainer.innerHTML = '';
+  
+    const favorites = getFavoritesFromLocalStorage();
+  
+    favorites.forEach((movieDetails) => {
+      const favoriteItem = document.createElement('div');
+      favoriteItem.classList.add('favorite-item');
+      favoriteItem.innerHTML = `
+        <h3>${movieDetails.Title}</h3>
+        <p> Film Waardering: ${movieDetails.rating || 'Niet beoordeeld'}</p>
+        <img src="${movieDetails.Poster}" alt="${movieDetails.Title} Poster">
+        <button class="remove-favorite-button" data-imdbId="${movieDetails.imdbID}">Supprimer</button>
+      `;
+  
+      favoritesContainer.appendChild(favoriteItem);
+    });
+  }
+  
+function removeFavorite(imdbId) {
+    const favorites = getFavoritesFromLocalStorage();
+    const updatedFavorites = favorites.filter((movie) => movie.imdbID !== imdbId);
+    saveFavoritesToLocalStorage(updatedFavorites);
+    updateFavoritesList();
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('remove-favorite-button')) {
+    const imdbId = event.target.getAttribute('data-imdbId'); 
+    removeFavorite(imdbId);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayRandomMovies();
+    fillGenreSelect();
+    updateFavoritesList();
+  
+    document.addEventListener('click', async(e) => {
+      const target = e.target;
+  
+      if (target.classList.contains('like-button')) {
+        const movieCard = target.parentElement;
+        const movieId = movieCard.dataset.imdbId;
+  
+        if (movieId) {
+          const movieDetails = await getMovieDetails(movieId);
+  
+          if (movieDetails) {
+            const ratingInput = document.createElement('input');
+            ratingInput.type = 'number';
+            ratingInput.min = '1';
+            ratingInput.max = '20';
+            ratingInput.placeholder = 'Rate (1-20)';
+            ratingInput.classList.add('rating-input');
+  
+            const addButton = document.createElement('button');
+            addButton.textContent = 'Add';
+            addButton.classList.add('rating-button', 'add-button'); 
+  
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.classList.add('rating-button', 'cancel-button'); 
+  
+            const ratingContainer = document.createElement('div');
+            ratingContainer.classList.add('rating-container'); 
+            ratingContainer.append(ratingInput, addButton, cancelButton); 
+  
+            movieCard.appendChild(ratingContainer);
+  
+            addButton.addEventListener('click', async() => {
+              const rating = parseInt(ratingInput.value, 10);
+  
+              if (rating >= 1 && rating <= 20) {
+                await addToFavorites(movieDetails, rating);
+                updateFavoritesList();
+                ratingContainer.remove();
+              }
+            });
+  
+            cancelButton.addEventListener('click', () => {
+              ratingContainer.remove();
+            });
+          }
+        }
+      }
+    });
+  });
