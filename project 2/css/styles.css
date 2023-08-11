@@ -17,8 +17,18 @@ header h1 {
   margin: 0;
 }
 
-main {
-  padding: 16px;
+#parents {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#favorites {
+  flex: 6; /* 60% */
+}
+
+#watch-later {
+  flex: 4; /* 40% */
 }
 
 #zoek,
@@ -220,6 +230,58 @@ main {
   background-color: white;
   color: black;
   border-color: currentColor;
+}
+
+/* Styles pour la liste "À regarder" */
+#watch-later {
+  border: 2px solid violet;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+}
+
+.watch-later-list {
+  display: flex;
+  flex-direction: column; /* Change from row to column */
+  gap: 16px;
+}
+
+.watch-later-item {
+  display: flex; 
+  align-items: center;
+  gap: 16px;
+}
+
+.watch-later-content {
+  display: flex;
+  align-items: flex-start; 
+  gap: 8px;
+  border: solid white 1px;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.watch-later-content img {
+  max-width: 60px; 
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.remove-watch-later-button { 
+  background-color: black;
+  color: red;
+  padding: 8px 16px;
+  border: 1px solid red;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.remove-watch-later-button:hover {
+  background-color: white;
+  color: black;
+  border-color: red;
 }
 
 footer {
