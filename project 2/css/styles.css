@@ -1,67 +1,46 @@
+/**
+ * Layout styles for FilmVinder+
+ *
+ * @author Ahidar Aiman
+ *
+ */
+
+/* GENERAL */
 body {
+  background-color: black;
+  color: #fff;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: black;
-  color: #fff;
 }
+/* ====== */
 
+/* HEADER */
 header {
   background-color: #8A2BE2;
-  color: #fff;
   padding: 16px;
   text-align: center;
 }
 
-header h1 {
-  margin: 0;
+header a {
+  color: #fff;
+  font-family: cursive;
+  text-decoration: none;
+}
+/* ====== */
+
+/* MAIN */
+h2 {
+  font-family: cursive;
 }
 
-#parents {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-#favorites {
-  flex: 6; /* 60% */
-}
-
-#watch-later {
-  flex: 4; /* 40% */
-}
-
-#zoek,
-#random-button {
-  color: #8A2BE2;
-  border: 1px solid black; 
-  font-size: 20px; 
-  padding: 5px 10px; 
-  background-color: transparent; 
-}
-
-#zoek:hover,
-#random-button:hover {
-  background-color: #8A2BE2; 
-  color: white; 
-  border-color: #8A2BE2; 
-}
-
+/* FILTES */
 #filter {
-  text-align: center;
   margin-bottom: 16px;
+  text-align: center;
 }
 
-#form {
-  display: inline-block;
-}
-
-#input {
-  padding: 8px;
-  margin-right: 15px; 
-}
-
-#filter-inputs{
+#filter-inputs {
   margin: 15px;
 }
 
@@ -69,146 +48,242 @@ header h1 {
   display: none;
 }
 
-#filter-inputs::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: purple;
-  margin-top: 10px;
-  margin-bottom: 10px;
+#form {
+  display: inline-block;
 }
 
+#input {
+  margin-right: 15px;
+  padding: 8px;
+}
+
+#filter-inputs::after {
+  background-color: purple;
+  content: '';
+  display: block;
+  height: 1px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+/* ====== */
+
+/* LIST */
 #list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; 
+  gap: 16px;
+  justify-content: center;
 }
 
 .movie-card {
-  border: 1px solid #fff; 
-  flex: 1 1 250px; 
-  max-width: 250px; 
-  margin-bottom: 16px; 
+  border: 1px solid #fff;
   border-radius: 4px;
   display: flex;
+  flex: 1 1 250px;
   flex-direction: column;
+  max-width: 160px;
+  margin-bottom: 16px;
 }
 
 .movie-card h2 {
-  font-size: 19.2px;
-  margin-bottom: 8px;
-  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
+  font-size: 12px;
+  margin-bottom: 8px;
   text-align: center;
 }
 
 .movie-card img {
-  max-width: 100%;
-  height: auto;
+  align-self: center;
   flex: 2;
+  height: auto;
+  max-width: 55%;
 }
 
 .movie-card p {
-  margin: 0;
-  font-size: 14px;
-  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
+  font-size: 10px;
+  margin: 0;
   text-align: center;
+}
+/* ====== */
+
+/* FAVORITES */
+#favorites {
+  flex: 60%;
 }
 
 #favorites {
   border: 2px solid violet;
-  padding: 16px;
-  margin-top: 16px;
   border-radius: 4px;
+  margin-top: 16px;
+  padding: 16px;
 }
 
 #favorites-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; 
+  gap: 16px;
+  justify-content: center;
 }
 
 .favorite-item {
-  border: 1px solid #fff; 
-  flex: 1 1 250px; 
-  max-width: 250px; 
-  margin-bottom: 16px; 
+  border: 1px solid #fff;
   border-radius: 4px;
   display: flex;
+  flex: 1 1 250px;
   flex-direction: column;
+  margin-bottom: 16px;
+  max-width: 170px;
 }
 
 .favorite-item h3 {
-  font-size: 19.2px;
-  margin-bottom: 8px;
-  flex: 1;
   display: flex;
-  align-items: center;
+  flex: 1;
+  font-size: 12px;
+  margin-bottom: 8px;
   justify-content: center;
-  text-align: center;
 }
 
 .favorite-item p {
   color: yellow;
+  font-size: 10px;
 }
 
 .favorite-item img {
-  max-width: 100%;
+  align-self: center;
   height: auto;
   flex: 2;
+  max-width: 55%;
 }
 
 .favorite-item p {
-  margin: 0;
-  font-size: 14px;
-  flex: 1;
   display: flex;
-  align-items: center;
+  flex: 1;
+  font-size: 14px;
+  margin: 0;
   justify-content: center;
-  text-align: center;
+}
+/* ====== */
+
+/* WATCH LATER */
+#watch-later {
+  flex: 40%;
 }
 
-/* Style des boutons */
+#watch-later {
+  border: 2px solid violet;
+  border-radius: 4px;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.watch-later-list {
+  display: flex;
+  flex-direction: column; 
+  gap: 16px;
+}
+
+.watch-later-list h3{
+  font-size: 13px;
+}
+
+.watch-later-item {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.watch-later-content {
+  align-items: flex-start;
+  border: solid white 1px;
+  border-radius: 4px;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+.watch-later-content img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: auto;
+  max-width: 60px;
+}
+/* ====== */
+
+/* Button */
+#speech-btn,
+#zoek,
+#random-button {
+  background-color: transparent;
+  border: 1px solid black;
+  color: #8A2BE2;
+  font-size: 20px;
+  padding: 5px 10px;
+}
+
+#speech-btn:hover,
+#zoek:hover,
+#random-button:hover {
+  background-color: #8A2BE2;
+  border-color: #8A2BE2;
+  color: white;
+}
+
 .like-button,
 .watch-later-button,
 .remove-favorite-button {
   background-color: black;
-  color: white;
-  padding: 8px 16px;
   border: none;
   border-radius: 4px;
+  color: white;
   cursor: pointer;
+  padding: 8px 16px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .like-button,
 .watch-later-button {
-  color: violet;
   border: 1px solid violet;
+  color: violet;
 }
 
 .remove-favorite-button {
-  color: red;
   border: 1px solid red;
+  color: red;
 }
 
 .like-button:hover,
 .watch-later-button:hover,
 .remove-favorite-button:hover {
   background-color: white;
-  color: black;
   border-color: currentColor;
+  color: black;
 }
 
+.remove-watch-later-button {
+  background-color: black;
+  border: 1px solid red;
+  border-radius: 4px;
+  color: red;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.remove-watch-later-button:hover {
+  background-color: white;
+  border-color: red;
+  color: black;
+}
+/* ====== */
+
+/* RATING */
 .rating-container {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .rating-input {
@@ -218,75 +293,125 @@ header h1 {
 
 .rating-button {
   background-color: black;
-  color: white;
-  padding: 4px 8px;
   border: none;
   border-radius: 4px;
+  color: white;
   cursor: pointer;
+  padding: 4px 8px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .rating-button:hover {
   background-color: white;
-  color: black;
   border-color: currentColor;
-}
-
-/* Styles pour la liste "À regarder" */
-#watch-later {
-  border: 2px solid violet;
-  padding: 16px;
-  margin-top: 16px;
-  border-radius: 4px;
-}
-
-.watch-later-list {
-  display: flex;
-  flex-direction: column; /* Change from row to column */
-  gap: 16px;
-}
-
-.watch-later-item {
-  display: flex; 
-  align-items: center;
-  gap: 16px;
-}
-
-.watch-later-content {
-  display: flex;
-  align-items: flex-start; 
-  gap: 8px;
-  border: solid white 1px;
-  border-radius: 4px;
-  padding: 10px;
-}
-
-.watch-later-content img {
-  max-width: 60px; 
-  height: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.remove-watch-later-button { 
-  background-color: black;
-  color: red;
-  padding: 8px 16px;
-  border: 1px solid red;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.remove-watch-later-button:hover {
-  background-color: white;
   color: black;
-  border-color: red;
 }
+/* ====== */
 
+/* ERROR */
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+/* ====== */
+
+
+/* FOOTER */
 footer {
   background-color: #8A2BE2;
   color: #fff;
   padding: 16px;
   text-align: center;
+}
+/* ====== */
+
+/* RESPONSIVE */
+@media (min-width: 650px) {
+
+  .movie-card{
+    max-width: 220px;
+  }
+
+  .movie-card img {
+    align-self: none;
+    height: auto;
+    max-width: 80%;
+  }
+
+  .movie-card h2 {
+    font-size: 16px;
+  }
+
+  .movie-card p {
+    font-size: 12px;
+  }
+
+  .favorite-item img {
+    align-self: none;
+    height: auto;
+    max-width: 80%;
+  }
+
+  .favorite-item h3 {
+    font-size: 16px;
+  }
+
+  .favorite-item p {
+    font-size: 12px;
+  }
+  .favorite-item {
+    max-width: 220px;
+  }
+  .watch-later-list h3{
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 750px) {
+  .movie-card{
+    max-width: 250px;
+  }
+
+  .movie-card img {
+    align-self: none;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .movie-card h2 {
+    font-size: 20px;
+  }
+
+  .movie-card p {
+    font-size: 14px;
+  }
+
+  .favorite-item img {
+    align-self: none;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .favorite-item h3 {
+    font-size: 20px;
+  }
+
+  .favorite-item p {
+    font-size: 14px;
+  }
+  .favorite-item {
+    max-width: 250px;
+  }
+  .watch-later-list h3{
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 950px){
+  #parents {
+    display: flex;
+    margin: 2px;
+    justify-content: space-between;
+  }
 }
