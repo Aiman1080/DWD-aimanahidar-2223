@@ -198,7 +198,6 @@ randomButton.addEventListener('click', function(event) {
 //     console.log('ontvangen data: ', data);
 // }
 // listbox();
-/* ====== */
 
 // Favorites
 // functie om het toevoegen van films in de favorites list
@@ -310,7 +309,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-/* ====== */
 
 // kijk lijst
 // functie om films toe te voegen binnen de watch-later list
@@ -381,7 +379,6 @@ function removeFromWatchLater(index) {
     updateWatchLaterList();
 }
 
-/* ====== */
 
 // LocalStorage
 // gaat films uithalen van de lijst
@@ -408,7 +405,6 @@ function saveWatchLaterToLocalStorage(watchLater) {
     localStorage.setItem('watchLater', watchLaterJSON);
 }
 
-/* ====== */
 
 // drag and drop (met behulp van chatgpt en youtube videos)
 watchLaterList.addEventListener('dragstart', (event) => {
@@ -462,7 +458,6 @@ watchLaterList.addEventListener('drop', (event) => {
     });
 });
 
-/* ====== */
 
 // speech API (met behulp van youtube, w3schools en chatgpt)
 if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
